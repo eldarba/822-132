@@ -6,20 +6,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import app.core.beans.MyBean;
+import app.core.beans.Person;
 
 @Configuration
 @ComponentScan
 @PropertySource("application.properties")
 public class Config {
 
-	@Bean
+	// @Bean
 	public String str() {
 		return "aaa";
 	}
 
-	@Bean
+	// @Bean
 	public MyBean myOtherBean() {
 		return new MyBean();
+	}
+
+	@Bean
+	public Person manager() {
+		Person p = new Person();
+		p.setName("Ran");
+		return p;
 	}
 
 }
