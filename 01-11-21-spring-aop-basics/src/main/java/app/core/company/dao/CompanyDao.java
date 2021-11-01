@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CompanyDao {
 
-	public void addCompany(int id, String name) throws RuntimeException {
+	public void addCompany(Company company) throws RuntimeException {
 		System.out.println("company added");
 	}
 
