@@ -23,11 +23,4 @@ public class Person {
 	private String name;
 	private int age;
 
-	public static void main(String[] args) {
-		Person p = new Person();
-		Person p2 = new Person(101, "aaa", 55);
-		System.out.println(p);
-		System.out.println(p2);
-	}
-
 }
