@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LogAspect {
 
-	@Before("all()")
+	@Before("allAppCore()")
 	public void ad() {
 		System.out.println("xxxxxxxxxx");
 	}
 
-	@Pointcut("execution(* *(..)")
-	public void all() {
+	// all methods in any class of app.core package and sub packages
+	@Pointcut("execution(* app.core..*.*(..))")
+	public void allAppCore() {
 	}
 
 }

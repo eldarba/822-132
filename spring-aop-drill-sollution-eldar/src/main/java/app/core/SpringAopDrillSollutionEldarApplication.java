@@ -15,7 +15,8 @@ public class SpringAopDrillSollutionEldarApplication {
 		ApplicationContext ctx = SpringApplication.run(SpringAopDrillSollutionEldarApplication.class, args);
 
 		LoginManager loginManager = ctx.getBean(LoginManager.class);
-		loginManager.login("aaa");
+		boolean isLoggedIn = loginManager.login("123");
+		System.out.println("is logged in: " + isLoggedIn);
 	}
 
 }
