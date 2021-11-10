@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class StatisticsAspect {
 
-	private int countGetCalls;
+	private int counter;
 
-	public int getCountGetCalls() {
-		return countGetCalls;
+	public int getCounter() {
+		return counter;
 	}
 
 	// ADVICES
 
 	@Before("basePackage() && getX()")
 	public void countGetCalls() throws Throwable {
-		countGetCalls++;
+		counter++;
 	}
 
 	// POINTCUTS

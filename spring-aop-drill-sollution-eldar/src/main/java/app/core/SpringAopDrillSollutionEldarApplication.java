@@ -34,7 +34,7 @@ public class SpringAopDrillSollutionEldarApplication {
 
 		System.out.println("======================");
 		StatisticsAspect statisticsAspect = ctx.getBean(StatisticsAspect.class);
-		System.out.println("number of \"get\" calls: " + statisticsAspect.getCountGetCalls());
+		System.out.println("number of \"get\" calls: " + statisticsAspect.getCounter());
 
 	}
 
