@@ -17,7 +17,7 @@ public class StatisticsAspect {
 
 	// ADVICES
 
-	@Before("basePackage() && getX()")
+	@Before("basePackage() && getCalls()")
 	public void countGetCalls() throws Throwable {
 		counter++;
 	}
@@ -25,7 +25,7 @@ public class StatisticsAspect {
 	// POINTCUTS
 
 	@Pointcut("execution(* get*(..))")
-	public void getX() {
+	public void getCalls() {
 	}
 
 	@Pointcut("app.core.aspects.Pointcuts.appCore()")
