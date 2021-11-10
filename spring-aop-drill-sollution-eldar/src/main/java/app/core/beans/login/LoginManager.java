@@ -11,7 +11,6 @@ public class LoginManager {
 	private String password;
 
 	public boolean login(String password) {
-		System.out.println("attempting login");
 		if (password.equals(this.password)) {
 			this.loggedIn = true;
 			return true;
