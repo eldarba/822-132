@@ -20,7 +20,7 @@ public class SpringAopDrillSollutionEldarApplication {
 		try {
 			LoginManager loginManager = ctx.getBean(LoginManager.class);
 			System.out.println("is logged in: " + loginManager.isLoggedIn());
-			loginManager.login("123");
+			loginManager.login("123"); // password is set in properties file
 			System.out.println("is logged in: " + loginManager.isLoggedIn());
 
 			CouponDao couponDao = ctx.getBean(CouponDao.class);
@@ -32,7 +32,7 @@ public class SpringAopDrillSollutionEldarApplication {
 			e.printStackTrace();
 		}
 
-		System.out.println("======================");
+		System.out.println("======== STATISTICS INFO ==============");
 		StatisticsAspect statisticsAspect = ctx.getBean(StatisticsAspect.class);
 		System.out.println("number of \"get\" calls: " + statisticsAspect.getCounter());
 
