@@ -63,7 +63,6 @@ public class App2 {
 		// calculate the average speed of all cars in the country
 		double avgApeedAllCarsInCountry = speedSumAllCarsInCountry / numOfAllCarsInTheCountry;
 
-		//
 		// number of cars in country
 		System.out.println("total number of cars in the country: " + country.getNumberOfCars());
 
