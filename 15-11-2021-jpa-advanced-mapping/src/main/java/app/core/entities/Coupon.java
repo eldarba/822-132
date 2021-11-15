@@ -1,12 +1,15 @@
 package app.core.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,32 +21,31 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@ToString(exclude = "address")
+@ToString(exclude = "reviews")
 @Entity
-public class Company {
+public class Coupon {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name;
-	private String email;
-	@OneToOne(cascade = {
+	private String title;
 
-			CascadeType.PERSIST,
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "coupon_id") // FK in Review table
+	private List<Review> reviews;
 
-			CascadeType.REMOVE,
+	// CTOR
+	public Coupon(int id, String title) {
+		this(id, title, null);
+	}
 
-			CascadeType.DETACH, // remove entity from persistence context
-
-			CascadeType.MERGE, // return a detached entity to persistence context
-
-			CascadeType.REFRESH }) // reload entity data from the database
-	@JoinColumn
-	private Address address;
-
-	// more CTORs
-	public Company(int id, String name, String email) {
-		this(id, name, email, null);
+	public void addReview(Review... review) {
+		if (this.reviews == null) {
+			this.reviews = new ArrayList<>();
+		}
+		for (Review curr : review) {
+			this.reviews.add(curr);
+		}
 	}
 
 }
