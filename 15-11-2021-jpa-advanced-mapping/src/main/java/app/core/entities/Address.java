@@ -31,13 +31,9 @@ public class Address {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
 	private Company company;
 
+	// more CTORs
 	public Address(int id, String street, int number, String city, String country) {
-		super();
-		this.id = id;
-		this.street = street;
-		this.number = number;
-		this.city = city;
-		this.country = country;
+		this(id, street, number, city, country, null);
 	}
 
 }

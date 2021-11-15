@@ -31,4 +31,9 @@ public class Company {
 	@JoinColumn
 	private Address address;
 
+	// more CTORs
+	public Company(int id, String name, String email) {
+		this(id, name, email, null);
+	}
+
 }
