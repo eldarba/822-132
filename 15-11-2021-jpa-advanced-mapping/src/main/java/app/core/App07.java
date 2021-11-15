@@ -1,5 +1,7 @@
 package app.core;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -7,13 +9,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import app.core.entities.Company;
+import app.core.entities.Coupon;
+import app.core.entities.Review;
 
 @SpringBootApplication
-public class App2 {
+public class App07 {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(App2.class, args);
+		ApplicationContext ctx = SpringApplication.run(App07.class, args);
 
 		EntityManagerFactory factory = ctx.getBean(EntityManagerFactory.class);
 		EntityManager em = factory.createEntityManager();
@@ -21,17 +24,19 @@ public class App2 {
 		em.getTransaction().begin();
 
 		try {
-			Company company = em.find(Company.class, 2);
-			if (company != null) {
-				System.out.println(company);
-				System.out.println(company.getAddress());
+			// ========================
+			Coupon coupon = em.find(Coupon.class, 1);
 
-				em.remove(company);
+			if (coupon != null) {
+				System.out.println(coupon);
+				List<Review> reviews = coupon.getReviews();
+				System.out.println(reviews);
 			}
 
 			// ========================
 			em.getTransaction().commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			em.getTransaction().rollback();
 		} finally {
 			factory.close();

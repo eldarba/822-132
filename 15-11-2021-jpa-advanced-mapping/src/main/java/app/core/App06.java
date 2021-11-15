@@ -1,5 +1,6 @@
 package app.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,10 +14,10 @@ import app.core.entities.Coupon;
 import app.core.entities.Review;
 
 @SpringBootApplication
-public class App7 {
+public class App06 {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(App7.class, args);
+		ApplicationContext ctx = SpringApplication.run(App06.class, args);
 
 		EntityManagerFactory factory = ctx.getBean(EntityManagerFactory.class);
 		EntityManager em = factory.createEntityManager();
@@ -25,13 +26,16 @@ public class App7 {
 
 		try {
 			// ========================
-			Coupon coupon = em.find(Coupon.class, 1);
+			Coupon coupon = new Coupon(0, "FOOD");
 
-			if (coupon != null) {
-				System.out.println(coupon);
-				List<Review> reviews = coupon.getReviews();
-				System.out.println(reviews);
-			}
+			List<Review> reviews = new ArrayList<>();
+			reviews.add(new Review(0, "Very Good"));
+			reviews.add(new Review(0, "Great"));
+			reviews.add(new Review(0, "So so"));
+
+			coupon.setReviews(reviews);
+
+			em.persist(coupon);
 
 			// ========================
 			em.getTransaction().commit();

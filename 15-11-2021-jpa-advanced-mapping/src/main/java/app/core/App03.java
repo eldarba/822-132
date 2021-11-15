@@ -10,10 +10,10 @@ import org.springframework.context.ApplicationContext;
 import app.core.entities.Address;
 
 @SpringBootApplication
-public class App3 {
+public class App03 {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(App3.class, args);
+		ApplicationContext ctx = SpringApplication.run(App03.class, args);
 
 		EntityManagerFactory factory = ctx.getBean(EntityManagerFactory.class);
 		EntityManager em = factory.createEntityManager();

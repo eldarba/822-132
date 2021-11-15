@@ -11,10 +11,10 @@ import app.core.entities.Student;
 import app.core.entities.University;
 
 @SpringBootApplication
-public class App9 {
+public class App09 {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(App9.class, args);
+		ApplicationContext ctx = SpringApplication.run(App09.class, args);
 
 		EntityManagerFactory factory = ctx.getBean(EntityManagerFactory.class);
 		EntityManager em = factory.createEntityManager();

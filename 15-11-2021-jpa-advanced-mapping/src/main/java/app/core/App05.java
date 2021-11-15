@@ -7,14 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import app.core.entities.Coupon;
-import app.core.entities.Review;
+import app.core.entities.Address;
+import app.core.entities.Company;
 
 @SpringBootApplication
-public class App8 {
+public class App05 {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(App8.class, args);
+		ApplicationContext ctx = SpringApplication.run(App05.class, args);
 
 		EntityManagerFactory factory = ctx.getBean(EntityManagerFactory.class);
 		EntityManager em = factory.createEntityManager();
@@ -22,15 +22,19 @@ public class App8 {
 		em.getTransaction().begin();
 
 		try {
-			// ========================
-			Coupon coupon = new Coupon(0, "Movies");
+			Company company = em.find(Company.class, 1);
+			if (company != null) {
+				Address address = company.getAddress();
+				System.out.println(company);
+				System.out.println(address);
 
-			Review r1 = new Review(0, "wow");
-			Review r2 = new Review(0, "nice");
+				company.setAddress(null); // set the address to null
 
-			coupon.addReview(r1, r2);
+				// now we can delete the address
 
-			em.persist(coupon);
+				em.remove(address);
+				System.out.println("deleted");
+			}
 
 			// ========================
 			em.getTransaction().commit();

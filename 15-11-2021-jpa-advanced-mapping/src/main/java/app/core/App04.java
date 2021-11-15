@@ -11,10 +11,10 @@ import app.core.entities.Address;
 import app.core.entities.Company;
 
 @SpringBootApplication
-public class App4 {
+public class App04 {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(App4.class, args);
+		ApplicationContext ctx = SpringApplication.run(App04.class, args);
 
 		EntityManagerFactory factory = ctx.getBean(EntityManagerFactory.class);
 		EntityManager em = factory.createEntityManager();
