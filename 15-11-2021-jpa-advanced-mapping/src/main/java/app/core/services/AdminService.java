@@ -3,6 +3,7 @@ package app.core.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class AdminService {
 	private CompanyRepo companyRepo;
 	@Autowired
 	private CouponRepo couponRepo;
+	@Autowired
+	private EntityManager em;
 
 	public int addCompany(Company company) {
 		company = companyRepo.save(company);
@@ -50,8 +53,9 @@ public class AdminService {
 	public List<Review> getCouponReviews(int couponId) {
 		Optional<Coupon> opt = this.couponRepo.findById(couponId);
 		if (opt.isPresent()) {
-			List<Review> reviews = opt.get().getReviews();
-			System.out.println(reviews);
+			Coupon coupon = opt.get();
+			em.refresh(coupon);
+			List<Review> reviews = coupon.getReviews();
 			return reviews;
 		} else {
 			throw new RuntimeException("coupon with id " + couponId + " not found");
