@@ -16,7 +16,7 @@ public class App50 {
 		ApplicationContext ctx = SpringApplication.run(App50.class, args);
 
 		AdminService adminService = ctx.getBean(AdminService.class);
-		Company company = new Company(0, "Tadiran", "tadiran@mail");
+		Company company = new Company(0, "Apple", "apple@mail");
 		company.setAddress(new Address(0, "aaa", 33, "bbb", "ccc"));
 		int id = adminService.addCompany(company);
 		System.out.println("company added: " + id);
