@@ -60,4 +60,8 @@ public class PersonService {
 		}
 	}
 
+	public void deleteAll() {
+		this.personRepository.deleteAll();
+	}
+
 }

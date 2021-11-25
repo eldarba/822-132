@@ -3,6 +3,7 @@ package app.core.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,8 @@ public class PersonController {
 
 	@Autowired
 	private PersonService personService;
+	@Autowired
+	private ConfigurableApplicationContext ctx;
 
 	// the user sends the person as JSON:
 	// {"id": 205, "name": "Ruth", "age": 25}
@@ -72,6 +75,16 @@ public class PersonController {
 		} catch (PersonAppException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "delete failed: " + e.getMessage(), e);
 		}
+	}
+
+	@DeleteMapping(path = "/all")
+	public void deleteAll() {
+		this.personService.deleteAll();
+	}
+
+	@DeleteMapping("/kill")
+	public void stopServer() {
+		ctx.close();
 	}
 
 	// homework
