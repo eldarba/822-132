@@ -62,4 +62,15 @@ public class PersonController {
 		}
 	}
 
+	@DeleteMapping("/{personId}/get")
+	public Person deleteAndGet(@PathVariable int personId) {
+		try {
+			Person p = personService.read(personId);
+			personService.delete(personId);
+			return p;
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "person id " + personId + " not found", e);
+		}
+	}
+
 }
