@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Person {
 
-	private long id;
+	private int id;
 	private String name;
 	private int age;
 

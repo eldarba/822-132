@@ -5,7 +5,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import app.core.beans.Student;
+import app.core.beans.Person;
 
 public class Demo2Person {
 
@@ -24,11 +24,11 @@ public class Demo2Person {
 		RequestEntity<Void> req = RequestEntity.method(HttpMethod.GET, baseUri + "/person").build();
 
 		// make the request and get the response
-		ResponseEntity<Student> resp = rt.exchange(req, Student.class);
+		ResponseEntity<Person> resp = rt.exchange(req, Person.class);
 
 		// extract the data from the ResponseEntity instance
 		int responseStatus = resp.getStatusCodeValue();
-		Student student = resp.getBody();
+		Person student = resp.getBody();
 
 		// print the response data
 		System.out.println("================");

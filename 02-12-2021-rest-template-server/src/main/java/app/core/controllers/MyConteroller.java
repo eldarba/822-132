@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.core.entities.Person;
+import app.core.entities.PersonWrapper;
 
 @RestController
 @RequestMapping("/api")
 public class MyConteroller {
+
+	private int nextPersonId = 101;
 
 	private List<Person> list = new ArrayList<>();
 
@@ -34,8 +37,17 @@ public class MyConteroller {
 		return this.list;
 	}
 
+	@GetMapping("/all/wrapper")
+	public PersonWrapper getAllWrapped() {
+		PersonWrapper personWrapper = new PersonWrapper();
+		personWrapper.setList(list);
+		return personWrapper;
+	}
+
 	@PostMapping("/person")
-	public void addPerson(@RequestBody Person person) {
+	public Person addPerson(@RequestBody Person person) {
+		person.setId(nextPersonId++);
 		this.list.add(person);
+		return person;
 	}
 }

@@ -19,7 +19,7 @@ public class Demo1Greet {
 		// define a request object
 		// http method: GET
 		// uri: http://localhost:8080/api/greet
-		RequestEntity<Void> req = RequestEntity.method(HttpMethod.GET, baseUri + "/greet/Avi").build();
+		RequestEntity<Void> req = RequestEntity.method(HttpMethod.GET, baseUri + "/greet/Dan").build();
 
 		// make the request and get the response
 		ResponseEntity<String> resp = rt.exchange(req, String.class);
