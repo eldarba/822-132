@@ -1,5 +1,7 @@
 package tests;
 
+import java.time.LocalDate;
+
 import org.springframework.boot.CommandLineRunner;
 
 import app.core.entities.Book;
@@ -21,7 +23,8 @@ public class Test2Service implements CommandLineRunner {
 		try {
 //			addBookToStore(21);
 //			deleteBook(8);
-			deleteStore(2);
+//			deleteStore(2);
+			updateBook();
 		} catch (BookStoreException e) {
 			// e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -41,6 +44,12 @@ public class Test2Service implements CommandLineRunner {
 	public void deleteStore(int storeId) throws BookStoreException {
 		this.storeService.deleteStore(storeId);
 		System.out.println("DELETED");
+	}
+
+	public void updateBook() throws BookStoreException {
+
+		Book book = new Book(2, "new-book", "Mark", 500, LocalDate.of(2000, 1, 20), null);
+		this.storeService.updateBook(book);
 	}
 
 }
