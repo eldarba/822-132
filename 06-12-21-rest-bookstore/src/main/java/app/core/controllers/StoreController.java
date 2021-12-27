@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import app.core.entities.Book;
 import app.core.entities.BookStore;
+import app.core.entities.BookWrapper;
 import app.core.exceptions.BookStoreException;
 import app.core.services.BookStoreService;
 
@@ -42,9 +43,21 @@ public class StoreController {
 	}
 
 	@GetMapping("/{storeId}")
-	public List<Book> getAllStoreBooks(int storeId) {
+	public List<Book> getAllStoreBooks(@PathVariable int storeId) {
 		try {
 			return bookStoreService.getAllBooks(storeId);
+		} catch (BookStoreException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		}
+	}
+
+	@GetMapping("/wraper/{storeId}")
+	public BookWrapper getAllStoreBooksWrapper(@PathVariable int storeId) {
+		try {
+			List<Book> list = bookStoreService.getAllBooks(storeId);
+			BookWrapper bookWrapper = new BookWrapper();
+			bookWrapper.setBooks(list);
+			return bookWrapper;
 		} catch (BookStoreException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
