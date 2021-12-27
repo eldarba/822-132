@@ -22,8 +22,8 @@ public class BookStoreService {
 	private BookStoreRepository storeRepo;
 
 	// add store with books
-	public void addStore(BookStore bookStore) {
-		this.storeRepo.save(bookStore);
+	public int addStore(BookStore bookStore) {
+		return this.storeRepo.save(bookStore).getId();
 	}
 
 	// add books to existing store

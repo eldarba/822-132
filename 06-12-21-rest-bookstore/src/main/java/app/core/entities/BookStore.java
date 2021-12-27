@@ -44,4 +44,12 @@ public class BookStore {
 		}
 	}
 
+	public void setBooks(List<Book> books) {
+		for (Book book : books) {
+			book.setBookStore(this);
+
+		}
+		this.books = books;
+	}
+
 }
