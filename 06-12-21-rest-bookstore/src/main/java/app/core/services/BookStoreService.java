@@ -1,6 +1,7 @@
 package app.core.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,12 @@ public class BookStoreService {
 		}
 	}
 
-	// delete book
+	/**
+	 * delete the book with the specified id
+	 * 
+	 * @param bookId
+	 * @throws BookStoreException if the book id specified not found
+	 */
 	public void deleteBook(int bookId) throws BookStoreException {
 		try {
 			this.bookRepo.deleteById(bookId);
@@ -65,11 +71,26 @@ public class BookStoreService {
 
 	// update an existing book
 	public void updateBook(Book book) throws BookStoreException {
-		if (this.bookRepo.existsById(book.getId())) {
-			this.bookRepo.save(book);
+		Optional<Book> opt = bookRepo.findById(book.getId());
+		if (opt.isPresent()) {
+			Book bookFromDb = opt.get();
+			bookFromDb.setAuthor(book.getAuthor());
+			bookFromDb.setPrice(book.getPrice());
+			bookFromDb.setPublication(book.getPublication());
+			bookFromDb.setTitle(book.getTitle());
 		} else {
 			throw new BookStoreException("updateBook failed - " + book + " not found.");
 		}
 	}
+
+//	public void updateBook(Book book) throws BookStoreException {
+//		if (this.bookRepo.existsById(book.getId())) {
+//			Book bookFromDb = this.bookRepo.findById(book.getId()).get();
+//			book.setBookStore(bookFromDb.getBookStore());
+//			this.bookRepo.save(book);
+//		} else {
+//			throw new BookStoreException("updateBook failed - " + book + " not found.");
+//		}
+//	}
 
 }
