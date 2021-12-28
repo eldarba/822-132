@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import app.core.beans.Book;
 
-public class Application2 {
+public class Application1Post {
 
 	public static void main(String[] args) {
 		System.out.println("========= rest template =====================");

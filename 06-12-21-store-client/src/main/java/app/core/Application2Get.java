@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import app.core.beans.Book;
 import app.core.beans.BookWrapper;
 
-public class Application {
+public class Application2Get {
 
 	public static void main(String[] args) {
 		System.out.println("========= rest template =====================");
