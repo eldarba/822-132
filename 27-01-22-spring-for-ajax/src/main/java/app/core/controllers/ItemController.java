@@ -29,7 +29,6 @@ public class ItemController {
 	@PostMapping
 	public int addItem(@RequestBody Item item) {
 		try {
-			System.out.println("AAAAAAAAAAAAAAAAA");
 			return service.addItem(item);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
