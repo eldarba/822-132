@@ -2,7 +2,9 @@ package app.core.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +20,16 @@ import app.core.services.ItemService;
 
 @RestController
 @RequestMapping("/items")
+@CrossOrigin
 public class ItemController {
 
+	@Autowired
 	private ItemService service;
 
 	@PostMapping
 	public int addItem(@RequestBody Item item) {
 		try {
+			System.out.println("AAAAAAAAAAAAAAAAA");
 			return service.addItem(item);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
