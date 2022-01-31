@@ -20,7 +20,7 @@ import app.core.services.ItemService;
 
 @RestController
 @RequestMapping("/items")
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class ItemController {
 
 	@Autowired

@@ -1,6 +1,7 @@
 package app.core.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,12 @@ public class ItemService {
 	}
 
 	public Item getItem(int id) {
-		return itemRepo.findById(id).orElseThrow();
+		Optional<Item> opt = itemRepo.findById(id);
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			throw new RuntimeException("get item with id " + id + " faild - not found");
+		}
 	}
 
 	public List<Item> getAllItems() {
@@ -32,10 +38,12 @@ public class ItemService {
 	}
 
 	public void updateItem(Item item) {
+		System.out.println(item);
 		if (itemRepo.existsById(item.getId())) {
 			this.itemRepo.save(item);
+		} else {
+			throw new RuntimeException("updateItem failed - item not found");
 		}
-		throw new RuntimeException("updateItem failed - item not found");
 	}
 
 	public void deleteItem(int id) {
