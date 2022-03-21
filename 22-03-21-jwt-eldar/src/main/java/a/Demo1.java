@@ -28,7 +28,9 @@ public class Demo1 {
 		Instant now = Instant.now();
 		Instant expiration = now.plus(5, ChronoUnit.MINUTES);
 
-		String token = Jwts.builder().signWith(key)
+		String token = Jwts.builder()
+				// sign the token
+				.signWith(key)
 				// set the subject - owner of the token
 				.setSubject("eldarba@gmail.com")
 				// set issued at
