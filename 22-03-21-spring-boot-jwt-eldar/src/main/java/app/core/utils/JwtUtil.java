@@ -14,6 +14,9 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import app.core.utils.JwtUtil.ClientDetails.ClientType;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
@@ -63,6 +66,44 @@ public class JwtUtil {
 				.signWith(key)
 
 				.compact();
+	}
+
+	public String extractSubject(String token) {
+		return exctractAllClaims(token).getSubject();
+	}
+
+	// add a method to extract the token expiration date
+	public Date extractExpiration(String token) {
+		return exctractAllClaims(token).getExpiration();
+	}
+
+	// add a method to extract the token issue date
+	public Date extractIssuedAt(String token) {
+		return exctractAllClaims(token).getIssuedAt();
+	}
+
+	// add method that can check for us if the token is expired or not
+	public boolean isTokenExpired(String token) {
+		try {
+			exctractAllClaims(token);
+			return false;
+		} catch (Exception e) {
+			return true;
+		}
+	}
+
+	public ClientDetails extractClient(String token) {
+		Claims claims = exctractAllClaims(token);
+		int clientId = claims.get("clientId", Integer.class);
+		String clientEmail = claims.getSubject();
+		ClientType clientType = ClientType.valueOf(claims.get("clientType", String.class));
+		ClientDetails clientDetails = new ClientDetails(clientId, clientEmail, clientType);
+		return clientDetails;
+	}
+
+	private Claims exctractAllClaims(String token) {
+		JwtParser jwtParser = Jwts.parserBuilder().setSigningKey(key).build();
+		return jwtParser.parseClaimsJws(token).getBody();
 	}
 
 	@Data
