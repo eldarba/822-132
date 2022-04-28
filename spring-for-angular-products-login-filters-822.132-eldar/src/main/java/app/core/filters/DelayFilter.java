@@ -9,14 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-
-@Controller
 public class DelayFilter implements Filter {
 
-	@Value("${my.filters.delay.milis: 100}")
 	private long milis;
+
+	public DelayFilter(long milis) {
+		super();
+		this.milis = milis;
+	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

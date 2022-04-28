@@ -45,7 +45,8 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(System.out);
+			resp.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 			resp.sendError(HttpStatus.UNAUTHORIZED.value(), "not logged in");
 		}
 

@@ -29,7 +29,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@PostMapping
-	public int addProducts(@RequestBody Product product, @RequestHeader String token) throws ResponseStatusException {
+	public int addProduct(@RequestBody Product product, @RequestHeader String token) throws ResponseStatusException {
 		try {
 			return this.productService.addProduct(product);
 		} catch (ProductException e) {
@@ -37,18 +37,8 @@ public class ProductController {
 		}
 	}
 
-	@GetMapping("/{productId}")
-	public Product getOneProduct(@PathVariable int productId) throws ResponseStatusException {
-		try {
-			return this.productService.getOneProduct(productId);
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-		}
-	}
-
 //	@GetMapping("/{productId}")
-//	public Product getOneProduct(@PathVariable int productId, @RequestHeader String token)
-//			throws ResponseStatusException {
+//	public Product getOneProduct(@PathVariable int productId) throws ResponseStatusException {
 //		try {
 //			return this.productService.getOneProduct(productId);
 //		} catch (Exception e) {
@@ -56,15 +46,25 @@ public class ProductController {
 //		}
 //	}
 
-	@GetMapping
-	public List<Product> getAllProducts() {
-		return this.productService.getAllProducts();
+	@GetMapping("/{productId}")
+	public Product getOneProduct(@PathVariable int productId, @RequestHeader String token)
+			throws ResponseStatusException {
+		try {
+			return this.productService.getOneProduct(productId);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		}
 	}
 
 //	@GetMapping
-//	public List<Product> getAllProducts(@RequestHeader String token) {
+//	public List<Product> getAllProducts() {
 //		return this.productService.getAllProducts();
 //	}
+
+	@GetMapping
+	public List<Product> getAllProducts(@RequestHeader String token) {
+		return this.productService.getAllProducts();
+	}
 
 	@PutMapping
 	public void updateProduct(Product product, @RequestHeader String token) throws ResponseStatusException {
