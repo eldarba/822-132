@@ -12,7 +12,7 @@ public class ControllerB {
 
 	@GetMapping("/service/b")
 	public String handleB() {
-		return "From: " + this.instanceId;
+		return this.instanceId;
 	}
 
 }
