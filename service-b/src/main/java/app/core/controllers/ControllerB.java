@@ -15,4 +15,9 @@ public class ControllerB {
 		return this.instanceId;
 	}
 
+	@GetMapping("/service/b/greet")
+	public String greet() {
+		return "Hello from B: " + instanceId;
+	}
+
 }
